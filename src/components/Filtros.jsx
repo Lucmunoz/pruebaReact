@@ -7,110 +7,42 @@ const Filtros = ({ types }) => {
 
     return (
         <>
-            <div className='col-3 text-center'>
-                <h3 className='m-0'>Busca a tus pokemon</h3>
-                <p className='p-1 pb-2 m-0'>Encuentra a tu pokemon por su nombre o muestralos según su especialidad</p>
-                <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Búsqueda por nombre" />
+            <div className='d-flex flex-column align-items-center col-2 text-center p-0'>
+                <h4 className=''>Busca a tus pokemon</h4>
+                <form className="d-flex col-10" role="search">
+                    <input className="form-control mx-2" type="search" placeholder="Búsqueda por nombre" />
                 </form>
             </div>
-
-            <div className='col-8 container-fluid align-self-center'>
-                <div className='row row-cols-6'>
-                    {
+            <div className="col-2 d-flex flex-column align-items-center">
+                <h4>Ordena los resultados</h4>
+                <div className='col-10'>
+                    <select className="form-select" aria-label="Default select example">
+                        <option value="default">Elige una opcion...</option>
+                        <option value="1">Orden Alfabetico A-Z</option>
+                        <option value="2">Orden Alfabetico Z-A</option>
+                        <option value="3">Peso Ascendente</option>
+                        <option value="3">Peso Descendente</option>
+                        <option value="3">Estatura Ascendente</option>
+                        <option value="3">Estatura Ascendente</option>
+                    </select>
+                </div>
+            </div>
+            <div className='row col-5 container-fluid align-self-center ps-3'>
+                {
                     typesArray.map(tipo => {
-                        return <div key ={tipo} className="form-check">
-                            <input className="" type="checkbox" value="" id="flexCheckDefault"/>
-                            <label className="ps-2 form-check-label">{tipo[0].toUpperCase() + tipo.slice(1)} </label>
+                        return <div key={tipo} className="col-2">
+                            <div className=" form-check p-0 m-0">
+                                <input className="" type="checkbox" value="" id="flexCheckDefault" />
+                                <label className=" ps-2 form-check-label ">{tipo[0].toUpperCase() + tipo.slice(1)} </label>
+                            </div>
                         </div>
                     })}
-                </div>
-
-
-
-
-
             </div>
+
+            <h5 className="pt-2 mb-0 text-center">Mostrando resultados... </h5>
+
         </>
     )
 }
 
 export default Filtros
-
-/*[
-    [
-        "normal",
-        "fighting",
-        "flying",
-        "poison",
-        "ground",
-        "rock",
-        "bug",
-        "ghost",
-        "steel",
-        "fire",
-        "water",
-        "grass",
-        "electric",
-        "psychic",
-        "ice",
-        "dragon",
-        "dark",
-        "fairy",
-        "unknown",
-        "shadow"
-    ]
-] 
-[
-    [
-        [
-            "normal",
-            "fighting",
-            "flying",
-            "poison",
-            "ground",
-            "rock",
-            "bug",
-            "ghost",
-            "steel",
-            "fire",
-            "water",
-            "grass",
-            "electric",
-            "psychic",
-            "ice",
-            "dragon",
-            "dark",
-            "fairy",
-            "unknown",
-            "shadow"
-        ]
-    ]
-]
-[
-    [
-        [
-            "normal",
-            "fighting",
-            "flying",
-            "poison",
-            "ground",
-            "rock",
-            "bug",
-            "ghost",
-            "steel",
-            "fire",
-            "water",
-            "grass",
-            "electric",
-            "psychic",
-            "ice",
-            "dragon",
-            "dark",
-            "fairy",
-            "unknown",
-            "shadow"
-        ]
-    ]
-]
-*/
