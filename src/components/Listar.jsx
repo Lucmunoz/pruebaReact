@@ -6,16 +6,10 @@ const Listar = ({ data, search, sort, typesSelected }) => {
   let filteredAndSortedData = []
 
   if (sort != "default" || search != "" || typesSelected.length != 0) {
-
     // arreglo filteredData contiene la data a mostrar filtrada en base al valor de busqueda ingresado por el usuario.
     let filteredDatabySearch = data.filter((elemento) => elemento.name.includes(search))
 
     let filteredDatabyType = []
-
-    /*
-const includesAll = (arr, values) => values.every(v => arr.includes(v));
-https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
- */
     if (typesSelected.length == 0) {
       filteredDatabyType = [...filteredDatabySearch]
     }
@@ -26,10 +20,6 @@ https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
       }
       filteredDatabyType = filteredDatabySearch.filter(pokemon => handleFilterByType(pokemon.types) == typesSelected.length)
     }
-
-
-
-
 
     /*Luego de filtrar la data, la ordeno en base a la opción del elemento select que elija el usuario. Para ello, haremos
       uso del metodo sort*/
@@ -89,20 +79,20 @@ https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
       }
     }
   }
+
   //No hay texto ingresado en el campo de busqueda, ni opción de ordenamiento seleccionada.
   else {
     filteredAndSortedData = [...data]
   }
 
-  return (
-    <>
-      {
-
-        filteredAndSortedData.map((element) => {
+  const displayData = ((pokemons) => {
+    return (
+      <>
+        {pokemons.map((element) => {
           return (
-            <div className="col d-flex justify-content-center" key={element.id}>
-              <div className="card col-12 bg-card">
-                <div className="container">
+            <div className='col' key={element.id}>
+              <div className="card bg-card">
+                <div className="card-header">
                   <img src={element.sprites.other["official-artwork"].front_default} className="card-img-top" alt="..." />
                 </div>
                 <div className="card-body text-center">
@@ -130,7 +120,21 @@ https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
             </div>
           )
         })
+        }
+      </>
+    )
+  })
 
+  const displayError = () => {
+    return (
+      <div className="align-self-center text-center">hola</div>
+    )
+  }
+
+  return (
+    <>
+      {
+        filteredAndSortedData.length != 0 ? displayData(filteredAndSortedData) : displayError()
       }
 
     </>
@@ -138,3 +142,33 @@ https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
 }
 export default Listar
 
+/* <div className="container-fluid d-flex flex-grow-1 overflow-auto justify-content-center">
+                <div className="col d-flex justify-content-center" key={element.id}>
+                  <div className="card col-12 bg-card">
+                    <div className="container">
+                      <img src={element.sprites.other["official-artwork"].front_default} className="card-img-top" alt="..." />
+                    </div>
+                    <div className="card-body text-center">
+                      <h5 className="card-title">{element.name.toUpperCase()}</h5>
+                      <div className="container p-0 pb-3 ">
+                        <div className='row gap-3 justify-content-center'>
+                          {
+                            element.types.map(({ type }) => <div key={type.name} className={`${type.name} tipo col-5 p-0 m-0`}> {type.name[0].toUpperCase() + type.name.slice(1)} </div>)
+                          }
+                        </div>
+                      </div>
+                      <div className="container p-0 ">
+                        <div className='row gap-3 justify-content-center'>
+                          <div className="col-5 bg-label p-0 m-0" role="alert">
+                            {element.height / 10} m
+                          </div>
+                          <div className="col-5 bg-label p-0 m-0" role="alert">
+                            {element.weight} kg
+                          </div>
+                        </div>
+                      </div>
+                      <p className="card-text"></p>
+                    </div>
+                  </div>
+                </div>
+              </div> */

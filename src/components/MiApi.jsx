@@ -9,7 +9,7 @@ const MiApi = () => {
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState("default")
     const [isloading, setIsloading] = useState(true)
-    const [typesSelected, setTypesSelected] =useState([])
+    const [typesSelected, setTypesSelected] = useState([])
 
     const getPokemonsData = async () => {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=151");
@@ -51,7 +51,7 @@ const MiApi = () => {
 
     const handleLoading = () => {
         return (
-            <div className='d-flex align-items-center'>
+            <div className='align-self-center text-center'>
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
@@ -61,11 +61,9 @@ const MiApi = () => {
 
     const handleData = () => {
         return (
-            <div className="col-9">
-                <div className="row row-cols-5 row-gap-5 p-3  overflow-auto justify-content-center ">
-                    {isloading ? handleLoading() : <Listar data={pokemons} search={search} sort={sort} typesSelected={ typesSelected} />}
-                </div>
-            </div>
+
+            isloading ? handleLoading() : <Listar data={pokemons} search={search} sort={sort} typesSelected={typesSelected} />
+
         )
     }
 
@@ -75,12 +73,14 @@ const MiApi = () => {
                 <div className="container col-2 text-center">
                     <img className="logo-img" src="src\assets\img\poke_logo.png" alt="Logo Pokemon" />
                 </div>
-                <div className=" col-10 d-flex flex-row  pt-2 pb-2 align-items-center ">
+                <div className=" col-10 d-flex flex-row  pt-2 pb-2 align-items-center  ">
                     <Filtros types={types} search={search} setSearch={setSearch} sort={sort} setSort={setSort} typesSelected={typesSelected} setTypesSelected={setTypesSelected} />
                 </div>
             </div>
             <div className="container-fluid d-flex flex-grow-1 overflow-auto justify-content-center">
-                {isloading ? handleLoading() : handleData()}
+                <div className="col-9 container-fluid  row row-cols-5 row-gap-4 pt-4 justify-content-center">
+                    {isloading ? handleLoading() : handleData()}
+                </div>
             </div>
             <div className="row py-2 bg-footer ">
                 <div className='col-2 text-center'><img className="w-50" src="src\assets\img\logo-academia-ne.png" alt="Logo Pokemon" /></div>
