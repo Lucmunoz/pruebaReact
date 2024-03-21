@@ -1,63 +1,104 @@
 import React, { useEffect, useState } from 'react'
 
-const Listar = ({ data, search, sort }) => {
-
-  let arr =[...data] 
-  let arr2=[]
-  let arr3=[]
-
-  if (sort != "default" || search != "") {
-
-    arr2 = arr.filter((elemento) => elemento.name.includes(search))
+const Listar = ({ data, search, sort, typesSelected }) => {
 
 
-    if (sort == 1) {
-      console.log("orden alfabetico a-z")
+  let filteredAndSortedData = []
 
-      arr3 = arr2.sort(function(a, b){
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
-        return 0;
-    })
+  if (sort != "default" || search != "" || typesSelected.length != 0) {
 
-    console.log(arr3)
+    // arreglo filteredData contiene la data a mostrar filtrada en base al valor de busqueda ingresado por el usuario.
+    let filteredDatabySearch = data.filter((elemento) => elemento.name.includes(search))
 
+    let filteredDatabyType = []
+
+    /*
+const includesAll = (arr, values) => values.every(v => arr.includes(v));
+https://www.30secondsofcode.org/js/s/array-includes-any-or-all-values/
+ */
+    if (typesSelected.length == 0) {
+      filteredDatabyType = [...filteredDatabySearch]
     }
-    else if(sort==2){
-      console.log("orden alfabetico z-a")
-    }
-    else if(sort==3){
-      console.log("orden por peso ascendente")
-    }
-    else if(sort==4){
-      console.log("orden por peso descendente")
-    }
-    else if(sort==5){
-      console.log("orden por estatura ascendente")
-    }
-    else if(sort==6){
-      console.log("orden por estatura descendente")
-    }
-    else{
-      
-    arr3=[...arr2]
+    else {
+      const handleFilterByType = (arreglo) => {
+        let arreglo_tipos_por_pokemon = arreglo.map(objeto => objeto.type.name)
+        return (arreglo_tipos_por_pokemon.filter(tipo => typesSelected.includes(tipo))).length;
+      }
+      filteredDatabyType = filteredDatabySearch.filter(pokemon => handleFilterByType(pokemon.types) == typesSelected.length)
     }
 
-    arr=[...arr3]
-    console.log(arr)
+
+
+
+
+    /*Luego de filtrar la data, la ordeno en base a la opción del elemento select que elija el usuario. Para ello, haremos
+      uso del metodo sort*/
+
+    // -> Valor default. Orden por defecto. El usuario no ha elegido ninguna opción de ordenamiento
+    if (sort == "default") {
+      filteredAndSortedData = [...filteredDatabyType]
+    }
+    else {
+      // -> 1) Orden alfabetico de la A a la Z.
+      if (sort == 1) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.name < b.name) { return -1; }
+          if (a.name > b.name) { return 1; }
+          return 0;
+        });
+      }
+      // -> 2) Orden alfabetico de la Z a la A.
+      else if (sort == 2) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.name > b.name) { return -1; }
+          if (a.name < b.name) { return 1; }
+          return 0;
+        });
+      }
+      // -> 3) Orden por peso ascendente
+      else if (sort == 3) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.weight < b.weight) { return -1; }
+          if (a.weight > b.weight) { return 1; }
+          return 0;
+        });
+      }
+      // -> 4) Orden por peso descendente
+      else if (sort == 4) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.weight > b.weight) { return -1; }
+          if (a.weight < b.weight) { return 1; }
+          return 0;
+        });
+      }
+      // -> 5) Orden por estatura ascendente
+      else if (sort == 5) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.height < b.height) { return -1; }
+          if (a.height > b.height) { return 1; }
+          return 0;
+        });
+      }
+      // -> 6) Orden por estatura descendente
+      else if (sort == 6) {
+        filteredAndSortedData = filteredDatabyType.sort(function (a, b) {
+          if (a.height > b.height) { return -1; }
+          if (a.height < b.height) { return 1; }
+          return 0;
+        });
+      }
+    }
   }
-  else{
-    console.log(data)
+  //No hay texto ingresado en el campo de busqueda, ni opción de ordenamiento seleccionada.
+  else {
+    filteredAndSortedData = [...data]
   }
-
-
-
 
   return (
     <>
       {
 
-arr.map((element) => {
+        filteredAndSortedData.map((element) => {
           return (
             <div className="col d-flex justify-content-center" key={element.id}>
               <div className="card col-12 bg-card">

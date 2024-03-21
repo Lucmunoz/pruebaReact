@@ -1,19 +1,30 @@
 import React from 'react'
-let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-const Filtros = ({ types, search, setSearch, sort, setSort }) => {
+const Filtros = ({ types, search, setSearch, sort, setSort, typesSelected, setTypesSelected }) => {
 
-    const typesArray = [...types]
-    //console.log(typesArray)
+    const handleSort = (event) => setSort(event.target.value)
+    const handleSearchString = (event) => setSearch(event.target.value)
+    const handleSelectedType = (event) => {
+        
+       let typesSelectedArray = [...typesSelected]
+        
+        if (event.target.checked) {
+            typesSelectedArray.push(event.target.value)
+            setTypesSelected(typesSelectedArray)
+        }
+        else {
+            const typesSelectedArrayFiltered = typesSelectedArray.filter(element => element!=event.target.value)
+            typesSelectedArray = typesSelectedArrayFiltered
+            setTypesSelected(typesSelectedArray)
+        }
+    }
 
-    const handleSort=(event)=> setSort(event.target.value)
-    const handleSearchString= (event)=> setSearch(event.target.value)
 
     return (
         <>
             <div className='d-flex flex-column align-items-center col-2 text-center p-0'>
                 <h4 className=''>Busca a tus pokemon</h4>
                 <form className="d-flex col-10" role="search">
-                    <input className="form-control mx-2" type="search" placeholder="Búsqueda por nombre" value={search} onChange={handleSearchString}/>
+                    <input className="form-control mx-2" type="search" placeholder="Búsqueda por nombre" value={search} onChange={handleSearchString} />
                 </form>
             </div>
             <div className="col-2 d-flex flex-column align-items-center">
@@ -24,19 +35,19 @@ const Filtros = ({ types, search, setSearch, sort, setSort }) => {
                         <option value="1">Orden Alfabetico A-Z</option>
                         <option value="2">Orden Alfabetico Z-A</option>
                         <option value="3">Peso Ascendente</option>
-                        <option value="3">Peso Descendente</option>
-                        <option value="3">Estatura Ascendente</option>
-                        <option value="3">Estatura Ascendente</option>
+                        <option value="4">Peso Descendente</option>
+                        <option value="5">Estatura Ascendente</option>
+                        <option value="6">Estatura Descendente</option>
                     </select>
                 </div>
             </div>
             <div className='row col-6 container-fluid align-self-center ps-3'>
                 {
-                    typesArray.map(tipo => {
-                        return <div key={tipo} className="col-2">
+                    types.map(type => {
+                        return <div key={type} className="col-2">
                             <div className=" form-check p-0 m-0">
-                                <input className="" type="checkbox" value="" id="flexCheckDefault" />
-                                <label className=" ps-2 form-check-label ">{tipo[0].toUpperCase() + tipo.slice(1)} </label>
+                                <input className="" type="checkbox" value={type} id="flexCheckDefault" onChange={handleSelectedType} />
+                                <label className=" ps-2 form-check-label ">{type[0].toUpperCase() + type.slice(1)} </label>
                             </div>
                         </div>
                     })}
