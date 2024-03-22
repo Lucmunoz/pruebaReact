@@ -16,6 +16,8 @@ const Listar = ({ data, search, sort, typesSelected }) => {
     else {
       const handleFilterByType = (arreglo) => {
         let arreglo_tipos_por_pokemon = arreglo.map(objeto => objeto.type.name)
+
+
         return (arreglo_tipos_por_pokemon.filter(tipo => typesSelected.includes(tipo))).length;
       }
       filteredDatabyType = filteredDatabySearch.filter(pokemon => handleFilterByType(pokemon.types) == typesSelected.length)
@@ -90,34 +92,32 @@ const Listar = ({ data, search, sort, typesSelected }) => {
       <>
         {pokemons.map((element) => {
           return (
-            <div className='col' key={element.id}>
+            <div className="col" key={element.id }>
               <div className="card bg-card">
-                <div className="card-header">
-                  <img src={element.sprites.other["official-artwork"].front_default} className="card-img-top" alt="..." />
-                </div>
+                <img src={element.sprites.other["official-artwork"].front_default} className="card-img-top" alt="..." />
                 <div className="card-body text-center">
-                  <h5 className="card-title">{element.name.toUpperCase()}</h5>
-                  <div className="container p-0 pb-3 ">
-                    <div className='row gap-3 justify-content-center'>
-                      {
-                        element.types.map(({ type }) => <div key={type.name} className={`${type.name} tipo col-5 p-0 m-0`}> {type.name[0].toUpperCase() + type.name.slice(1)} </div>)
-                      }
+                      <h5 className="card-title">{element.name.toUpperCase()}</h5>
+                      <div className="container p-0 pb-3 ">
+                        <div className='row gap-3 justify-content-center'>
+                          {
+                            element.types.map(({ type }) => <div key={type.name} className={`${type.name} tipo col-5 p-0 m-0`}> {type.name[0].toUpperCase() + type.name.slice(1)} </div>)
+                          }
+                        </div>
+                      </div>
+                      <div className="container p-0 ">
+                        <div className='row gap-3 justify-content-center'>
+                          <div className="col-5 bg-label p-0 m-0" role="alert">
+                            {element.height / 10} m
+                          </div>
+                          <div className="col-5 bg-label p-0 m-0" role="alert">
+                            {element.weight} kg
+                          </div>
+                        </div>
+                      </div>
+                      <p className="card-text"></p>
                     </div>
                   </div>
-                  <div className="container p-0 ">
-                    <div className='row gap-3 justify-content-center'>
-                      <div className="col-5 bg-label p-0 m-0" role="alert">
-                        {element.height / 10} m
-                      </div>
-                      <div className="col-5 bg-label p-0 m-0" role="alert">
-                        {element.weight} kg
-                      </div>
-                    </div>
-                  </div>
-                  <p className="card-text"></p>
-                </div>
               </div>
-            </div>
           )
         })
         }
@@ -127,7 +127,16 @@ const Listar = ({ data, search, sort, typesSelected }) => {
 
   const displayError = () => {
     return (
-      <div className="align-self-center text-center">hola</div>
+      <div className="container d-flex flex-row col-9 justify-content-center align-self-center">
+        <div className="col-2">
+          <img src="src\assets\img\logo_error.png" className="card-img-top" alt="..." />
+        </div>
+        <div className='d-flex flex-column align-self-center ps-4'>
+        <h2>Ups</h2>
+          <p className='m-0'>No hemos encontrado ningun resultado que coincida con tus criterios de busqueda.</p>
+          <p>Por favor, intentalo nuevamente!</p>
+          </div>
+      </div>
     )
   }
 

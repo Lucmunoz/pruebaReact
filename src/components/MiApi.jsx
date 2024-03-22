@@ -69,25 +69,41 @@ const MiApi = () => {
 
     return (
         <div className='container-fluid w-100 h-100 d-flex flex-column'>
-            <div className="container-fluid bg-filtros d-flex flex-row align-items-center">
-                <div className="container col-2 text-center">
-                    <img className="logo-img" src="src\assets\img\poke_logo.png" alt="Logo Pokemon" />
-                </div>
-                <div className=" col-10 d-flex flex-row  pt-2 pb-2 align-items-center  ">
-                    <Filtros types={types} search={search} setSearch={setSearch} sort={sort} setSort={setSort} typesSelected={typesSelected} setTypesSelected={setTypesSelected} />
-                </div>
+            <div className="container-fluid bg-filtros align-items-center">
+                <Filtros types={types} search={search} setSearch={setSearch} sort={sort} setSort={setSort} typesSelected={typesSelected} setTypesSelected={setTypesSelected} />
             </div>
-            <div className="container-fluid d-flex flex-grow-1 overflow-auto justify-content-center">
-                <div className="col-9 container-fluid  row row-cols-5 row-gap-4 pt-4 justify-content-center">
+
+            <div className="container-fluid d-flex flex-grow-1 overflow-auto justify-content-center pt-4">
+                <div className="col-9 container-fluid  row row-cols-5 row-gap-4 justify-content-center">
                     {isloading ? handleLoading() : handleData()}
                 </div>
             </div>
-            <div className="row py-2 bg-footer ">
-                <div className='col-2 text-center'><img className="w-50" src="src\assets\img\logo-academia-ne.png" alt="Logo Pokemon" /></div>
-                <div className='col-5'>
-                    <p className="mb-0 footer-text text-center fst-italic ms-auto me-auto">Este sitio web no cuenta con el patrocinio de Pokemon® y se desarrolla con fines académicos a fin de aprobar el modulo REACT-I del programa de estudios "Programación Fullstack" academia Desafío Latam.</p>
+
+            <div className="container-fluid d-flex flex-row py-2 bg-footer justify-content-center">
+                <div className='pe-4 text-center'>
+                    <img className="logo-desafio pe-3" src="src\assets\img\logo-academia-ne.png" alt="Logo Pokemon" />
                 </div>
-                <div className='col-2'><p className="m-0">Referencias Utilizadas</p> </div>
+                
+                <div className="col-5 pe-3 text-center">
+                    <p className="mb-0 footer-text fst-italic ms-auto me-auto">Este sitio web no cuenta con el patrocinio de Pokemon® y se desarrolla con fines académicos a fin de aprobar el modulo REACT-I del programa de estudios "Programación Fullstack" academia Desafío Latam.</p>
+                </div>
+                <div className='col-2 d-flex flex-row column-gap-4 align-self-center justify-content-center'>
+                    <div className="col-1">
+                        <a href="http://www.ejemplo.es"><i className="fa-brands fa-square-facebook  rrss-icon"></i></a>
+                    </div>
+                    <div className="col-1 ">
+                        <a href="http://www.ejemplo.es"><i className="fa-brands fa-square-instagram  rrss-icon"></i></a>
+                    </div>
+                    <div className="col-1">
+                        <a href="http://www.ejemplo.es"><i className="fa-brands fa-square-github  rrss-icon"></i></a>
+                    </div>
+                    <div className="col-1">
+                        <a href="http://www.ejemplo.es"><i className="fa-brands fa-square-x-twitter  rrss-icon"></i></a>
+                    </div>
+                    <div className="col-1">
+                        <a href="http://www.ejemplo.es"><i className="fa-brands fa-square-youtube  rrss-icon"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     )

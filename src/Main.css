@@ -29,8 +29,19 @@ body{
 .bg-footer{
   background-color: #4ea3e949;
 }
-.logo-img{
-height: 80px;
+.img-logo{
+height: 75px;
+}
+
+.rrss-icon{
+font-size: 2rem;
+cursor: pointer;
+}
+
+a{
+text-decoration: none;
+color: #362575;
+
 }
 
 .fire{ background-color: #EE8130;}
@@ -59,6 +70,10 @@ height: 80px;
 .card:hover {
   transform: scale(1.05);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.logo-desafio
+{
+height: 50px;
 }
 
 .bg-card:hover{
