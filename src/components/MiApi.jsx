@@ -61,9 +61,7 @@ const MiApi = () => {
 
     const handleData = () => {
         return (
-
             isloading ? handleLoading() : <Listar data={pokemons} search={search} sort={sort} typesSelected={typesSelected} />
-
         )
     }
 
