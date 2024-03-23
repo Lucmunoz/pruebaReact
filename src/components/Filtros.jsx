@@ -3,7 +3,6 @@ const Filtros = ({ types, search, setSearch, sort, setSort, typesSelected, setTy
 
     const handleSort = (event) => setSort(event.target.value)
     const handleSearchString = (event) => setSearch(event.target.value)
-   
     const handleSelectedType = (event) => {
 
         let typesSelectedArray = [...typesSelected]

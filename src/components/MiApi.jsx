@@ -3,7 +3,6 @@ import Listar from './Listar'
 import Filtros from './Filtros'
 
 const MiApi = () => {
-
     const [pokemons, setPokemons] = useState([]);
     const [types, setTypes] = useState([]);
     const [search, setSearch] = useState("")
