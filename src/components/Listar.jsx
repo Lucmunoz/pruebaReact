@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react'
-
 const Listar = ({ data, search, sort, typesSelected }) => {
 
 
@@ -16,8 +14,6 @@ const Listar = ({ data, search, sort, typesSelected }) => {
     else {
       const handleFilterByType = (arreglo) => {
         let arreglo_tipos_por_pokemon = arreglo.map(objeto => objeto.type.name)
-
-
         return (arreglo_tipos_por_pokemon.filter(tipo => typesSelected.includes(tipo))).length;
       }
       filteredDatabyType = filteredDatabySearch.filter(pokemon => handleFilterByType(pokemon.types) == typesSelected.length)
@@ -150,34 +146,3 @@ const Listar = ({ data, search, sort, typesSelected }) => {
   )
 }
 export default Listar
-
-/* <div className="container-fluid d-flex flex-grow-1 overflow-auto justify-content-center">
-                <div className="col d-flex justify-content-center" key={element.id}>
-                  <div className="card col-12 bg-card">
-                    <div className="container">
-                      <img src={element.sprites.other["official-artwork"].front_default} className="card-img-top" alt="..." />
-                    </div>
-                    <div className="card-body text-center">
-                      <h5 className="card-title">{element.name.toUpperCase()}</h5>
-                      <div className="container p-0 pb-3 ">
-                        <div className='row gap-3 justify-content-center'>
-                          {
-                            element.types.map(({ type }) => <div key={type.name} className={`${type.name} tipo col-5 p-0 m-0`}> {type.name[0].toUpperCase() + type.name.slice(1)} </div>)
-                          }
-                        </div>
-                      </div>
-                      <div className="container p-0 ">
-                        <div className='row gap-3 justify-content-center'>
-                          <div className="col-5 bg-label p-0 m-0" role="alert">
-                            {element.height / 10} m
-                          </div>
-                          <div className="col-5 bg-label p-0 m-0" role="alert">
-                            {element.weight} kg
-                          </div>
-                        </div>
-                      </div>
-                      <p className="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-              </div> */

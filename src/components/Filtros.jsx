@@ -3,6 +3,7 @@ const Filtros = ({ types, search, setSearch, sort, setSort, typesSelected, setTy
 
     const handleSort = (event) => setSort(event.target.value)
     const handleSearchString = (event) => setSearch(event.target.value)
+   
     const handleSelectedType = (event) => {
 
         let typesSelectedArray = [...typesSelected]
@@ -78,28 +79,3 @@ const Filtros = ({ types, search, setSearch, sort, setSort, typesSelected, setTy
 }
 
 export default Filtros
-//<label className="" >{type[0].toUpperCase() + type.slice(1)} </label>
-/*<div className="container col-2 text-center">
-                
-            </div>
-
-            <div className='d-flex flex-column align-items-center col-1 text-center p-0'>
-                <h4 className=''>Busca a tus pokemon</h4>
-                
-            </div>
-
-            <div className="col-1 d-flex flex-column align-items-center">
-                <h4>Ordena los resultados</h4>
-                <div className='col-10'>
-                    
-                </div>
-            </div>
-            <div className='container-fluid'>
-                <div className="row d-flex flex-row">
-                    {
-                        types.map(type => {
-                            return(<></>
-)
-                        })}
-                </div>
-            </div> */
